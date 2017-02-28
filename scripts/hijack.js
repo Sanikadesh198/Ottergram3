@@ -1,14 +1,20 @@
 //function to disable default click functionlity
 
-function disableAllLinks() {
+var LINK_SELECTOR = '[href]';
+
+function onClickHandler(url) {
     'use strict';
-    document.addEventListener('click', function(e) {
-      //event.preventDefault();
-        e.preventDefault();
-        e.stopPropogation();
-        return false;
+    url.addEventListener('click', function(event) {
+        event.preventDefault();
     });
 }
 
-var links = [].slice.call(document.getElementByTagName('a'));
-links.forEach(disableAllLinks);
+function intializeHijack() {
+    'use strict';
+    var allLinks = document.querySelectorAll(LINK_SELECTOR);
+    var allLinksArray = [].slice.call(allLinks);
+    allLinksArray.forEach(onClickHandler);
+
+}
+
+intializeHijack();
